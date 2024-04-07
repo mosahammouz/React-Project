@@ -81,7 +81,7 @@ const showDetails = (id: string) => {
       </table>  
          <div className="pagination">
         <button id="prevBtn" onClick={prevPage}>Previous</button>
-        <span id="pageInfo">Page {currentPage}</span>
+        <span id="pageInfo">PAGEE {currentPage}</span>
         <button id="nextBtn" onClick={nextPage}>Next</button>
       </div>  
 
