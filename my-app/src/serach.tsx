@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import SWAPIComponent from "./getNames";
+import React from "react";
 <link rel="stylesheet" href="index.css"/>
 
  export interface Person {
@@ -11,18 +9,18 @@ import SWAPIComponent from "./getNames";
     url :string;
 }
 type SearchByNameProps ={
-    next: () => void;
-    prev: ()=> void;
+    //next: () => void;
+    //prev: ()=> void;
     searchTerm : string; 
     setSearchTerm :(searchTerm: string)=>void; 
-    people : Person[] ;
-    setPeople : ( people : Person[]  )=>void; 
+    //people : Person[] ;
+   // setPeople : ( people : Person[]  )=>void; 
   }
   
 const SearchByName = ( props:SearchByNameProps ) => {
    // const [searchTerm, setSearchTerm] = useState<string>('');
    // const [people, setPeople] = useState<Person[]>([]);
-const {next,prev , searchTerm,setSearchTerm , people , setPeople} =props;
+const {searchTerm,setSearchTerm } =props;
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };

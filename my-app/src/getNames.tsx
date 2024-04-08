@@ -39,17 +39,14 @@ const SWAPIComponent: React.FC = () => {
     }
   };
 
-const showDetails = (id: string) => {
-    const url = `Page2.html?exampleParam=${id}`;
-    window.location.href = url;
-  };
+
 
 
   return (
     <div>
       <h2>Star Wars Characters</h2>
       <br/><br/>
-      <SearchByName  next={nextPage} prev={prevPage}  setPeople={setPeople} people={people} setSearchTerm={setSearchTerm}   searchTerm={searchTerm} /> 
+      <SearchByName setSearchTerm={setSearchTerm}   searchTerm={searchTerm} /> 
       <br/><br/>
         <table id="charactersTable">
         <thead>
