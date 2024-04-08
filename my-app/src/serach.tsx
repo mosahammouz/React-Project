@@ -3,7 +3,7 @@ import axios from "axios";
 import SWAPIComponent from "./getNames";
 <link rel="stylesheet" href="index.css"/>
 
-interface Person {
+ export interface Person {
     name: string;
     gender: string;
     height: string;
@@ -13,33 +13,34 @@ interface Person {
 type SearchByNameProps ={
     next: () => void;
     prev: ()=> void;
-       
+    searchTerm : string; 
+    setSearchTerm :(searchTerm: string)=>void; 
+    people : Person[] ;
+    setPeople : ( people : Person[]  )=>void; 
   }
   
-const SearchByName = ({next}:SearchByNameProps , {prev}:SearchByNameProps ,
-    
-) => {
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const [people, setPeople] = useState<Person[]>([]);
-
+const SearchByName = ( props:SearchByNameProps ) => {
+   // const [searchTerm, setSearchTerm] = useState<string>('');
+   // const [people, setPeople] = useState<Person[]>([]);
+const {next,prev , searchTerm,setSearchTerm , people , setPeople} =props;
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get<{ results: Person[] }>(`https://swapi.dev/api/people/?search=${searchTerm}`);
-                setPeople(response.data.results);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get<{ results: Person[] }>(`https://swapi.dev/api/people/?search=${searchTerm}`);
+    //             setPeople(response.data.results);
    
 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+    //         } catch (error) {
+    //             console.error('Error fetching data:', error);
+    //         }
+    //     };
 
-        fetchData();
-    }, [searchTerm]);
+    //     fetchData();
+    // }, [searchTerm]);
 
     // let elem: HTMLElement | null = document.getElementById("mmm");
     // if (elem && searchTerm !== '') {
@@ -62,7 +63,7 @@ const SearchByName = ({next}:SearchByNameProps , {prev}:SearchByNameProps ,
             />
           <br/><br/>
           
-      
+{/*       
             <table>
         <thead>
           <tr>
@@ -85,7 +86,7 @@ const SearchByName = ({next}:SearchByNameProps , {prev}:SearchByNameProps ,
           ))}
         </tbody>
       </table>  
-   
+    */}
        
         </div>
     );

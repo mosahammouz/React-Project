@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import SearchByName from './serach';
+import SearchByName, { Person } from './serach';
 import axios from 'axios';
-
-interface Person {
-  name: string;
-  gender: string;
-  height: string;
-  eye_color: string;
-}
 
 
 
 const SWAPIComponent: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
 
         
-        const response = await axios.get<{ results: Person[] }>(`https://swapi.dev/api/people/?page=${currentPage}`);
+        const response = await axios.get<{ results: Person[] }>(`https://swapi.dev/api/people/?page=${currentPage}&search=${searchTerm}`);
         setPeople(response.data.results);
         
       } catch (error) {
@@ -29,7 +23,7 @@ const SWAPIComponent: React.FC = () => {
     };
 
     fetchData();
-  }, [currentPage]); // Include currentPage in the dependency array
+  }, [currentPage ,searchTerm]); // Include currentPage in the dependency array
 
   
 
@@ -55,7 +49,7 @@ const showDetails = (id: string) => {
     <div>
       <h2>Star Wars Characters</h2>
       <br/><br/>
-      <SearchByName  next={nextPage} prev={prevPage} /> 
+      <SearchByName  next={nextPage} prev={prevPage}  setPeople={setPeople} people={people} setSearchTerm={setSearchTerm}   searchTerm={searchTerm} /> 
       <br/><br/>
         <table id="charactersTable">
         <thead>
@@ -81,7 +75,7 @@ const showDetails = (id: string) => {
       </table>  
          <div className="pagination">
         <button id="prevBtn" onClick={prevPage}>Previous</button>
-        <span id="pageInfo">PAGEeeeeeeeeeeeE {currentPage}</span>
+        <span id="pageInfo">PAGE {currentPage}</span>
         <button id="nextBtn" onClick={nextPage}>Next</button>
       </div>  
 
