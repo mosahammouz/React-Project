@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchByName, { Person } from './serach';
 import axios from 'axios';
-
-
+import { Link  } from 'react-router-dom';
 
 const SWAPIComponent: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -41,7 +40,6 @@ const SWAPIComponent: React.FC = () => {
 
 
 
-
   return (
     <div>
       <h2>Star Wars Characters</h2>
@@ -59,13 +57,13 @@ const SWAPIComponent: React.FC = () => {
           </tr>
         </thead>
         <tbody id = "mmm">
-          {people.map((person, index) => (
+          {people.map((person, index,url) => (
             <tr key={index}>
               <td>{person.name}</td>
               <td>{person.gender}</td>
               <td>{person.height}</td>
               <td>{person.eye_color}</td>
-              <td> <div className="pagination2" >  <button >Details</button> </div></td>
+              <td> <div className="pagination2" >   <Link to = {`/details/${person.url.split('/').slice(-2, -1)}`}> <button  >Details</button> </Link> </div></td>
             </tr>
           ))}
         </tbody>
@@ -75,8 +73,8 @@ const SWAPIComponent: React.FC = () => {
         <span id="pageInfo">PAGE {currentPage}</span>
         <button id="nextBtn" onClick={nextPage}>Next</button>
       </div>  
-
-     
+ 
+    
 
     </div>
   );
